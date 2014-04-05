@@ -1,6 +1,6 @@
 package co.edu.andes.businessRules;
 
-import co.edu.andes.tools.LanguageType;
+import co.edu.andes.entities.LanguageType;
 
 public class FactoryLOCCounter 
 {

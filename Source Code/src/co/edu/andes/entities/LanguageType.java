@@ -1,4 +1,4 @@
-package co.edu.andes.tools;
+package co.edu.andes.entities;
 
 public enum LanguageType 
 {

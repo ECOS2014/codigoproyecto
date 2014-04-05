@@ -1,14 +1,38 @@
 package co.edu.andes.entities;
 
-import co.edu.andes.tools.LineType;
 
 public class Line 
 {
 	private String content;
-	private LineType currentLineType = LineType.None;
-	private int lineLocation;
+	private LineType currentLineType;
+	private int location;
+	
+	public Line(String content, int location) {
+		this.content = content;
+		this.currentLineType  = LineType.None;
+		this.location = location;
+	}
 	
 	
+	
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+
+	public void setCurrentLineType(LineType currentLineType) {
+		this.currentLineType = currentLineType;
+	}
+
+
+
+	public void setLocation(int location) {
+		this.location = location;
+	}
+
+
+
 	public String getContent() 
 	{
 		return content;
@@ -19,8 +43,8 @@ public class Line
 		return currentLineType;
 	}
 	
-	public int getLineLocation() 
+	public int getLocation() 
 	{
-		return lineLocation;
+		return location;
 	}
 }

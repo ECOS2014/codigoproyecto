@@ -43,4 +43,17 @@ public class ProgramPart
 	{
 		return totalLOC;
 	}	
+	
+	@Override
+	public String toString(){
+		String summary;
+		
+		summary = "Total LOC: "+ this.totalLOC +"\n"+
+				 "Total agregadas: "+ this.totalLOCAdded +"\n"+
+				"Total eliminadas: " + this.totalLOCDeleted;
+		
+		return summary;
+				
+		 
+	}
 }

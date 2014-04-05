@@ -37,6 +37,7 @@ public class ProgramComparator
 		part = new  ProgramPart();
 		this.compareFiles(pathOldProgram, pathNewProgram, newFile, part);
 		
+		System.out.print(part.toString());
 		this.saveFile(newFile, pathResultProgram);
 	}
 

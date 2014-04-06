@@ -5,11 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
@@ -170,12 +171,17 @@ public class Main extends javax.swing.JFrame {
 		ProgramComparatorFacade facade;
 		ChangeLabel label;
 		List<ProgramPart> parts;
+		try{
 		if(pathCurrent.length()>0 && pathNew.length()>0 && pathOld.length()>0){
 			facade = new  ProgramComparatorFacade();
 			label = new ChangeLabel();
 			parts = new LinkedList<ProgramPart>();
 			facade.comparePrograms(pathCurrent, pathOld, pathNew, label, parts, "Java");
 			
+		}
+		}catch(NullPointerException e){
+			JOptionPane.showMessageDialog(null, "Debe seleccionar las 3 rutas.", "Error", JOptionPane.ERROR_MESSAGE);
+            
 		}
 	}
 

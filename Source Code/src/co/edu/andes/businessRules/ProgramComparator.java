@@ -18,6 +18,8 @@ public class ProgramComparator
 
 	private Program currentVersion;
 	private Program lastVersion;
+	//TODO: use or remove
+	public ProgramPart globalPartSumary;
 
 	public ProgramComparator() 
 	{

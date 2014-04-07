@@ -14,7 +14,7 @@ public class ProgramComparatorFacade
 		ProgramComparator comparator;
 		comparator = new ProgramComparator();
 		comparator.comparePrograms(pathOldProgram, pathCurrentProgram, pathNewProgram, changeLabel, parts, language);
-	    mainClass.addResult(comparator.globalPartSumary);
+	    //mainClass.addResult(comparator.globalPartSumary);
 	}
 	
 }

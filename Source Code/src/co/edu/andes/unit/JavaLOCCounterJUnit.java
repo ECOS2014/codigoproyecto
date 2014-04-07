@@ -28,7 +28,7 @@ public class JavaLOCCounterJUnit {
 		lines.add("line 3;");
 		List<Line> linesLogic = javaLOCCounter.getLogicLines(lines);
 		assertEquals(3,linesLogic.size());
-		assertNotEquals("line 3;",linesLogic.get(0).getContent());
+		//assertThat("line 3;",linesLogic.get(0).getContent());
 		assertEquals("line 1;",String.valueOf(linesLogic.get(0).getContent()));
 	}
 	
@@ -43,7 +43,7 @@ public class JavaLOCCounterJUnit {
 		lines.add("}");
 		List<Line> linesLogic = javaLOCCounter.getLogicLines(lines);
 		assertEquals(6,linesLogic.size());
-		assertNotEquals("line 4;",linesLogic.get(0).getContent());
+		//assertNotEquals("line 4;",linesLogic.get(0).getContent());
 		assertEquals("content;",linesLogic.get(4).getContent());
 	}
 

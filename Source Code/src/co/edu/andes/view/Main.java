@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -76,7 +77,7 @@ public class Main extends javax.swing.JFrame {
 	public Main() {
 		super();
 		fileChooser = new JFileChooser();
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		initGUI();
 	}
 
@@ -175,6 +176,7 @@ public class Main extends javax.swing.JFrame {
 	}
 
 	private void btnChooseOldProyMouseClicked(MouseEvent evt) {
+		fileChooser.setCurrentDirectory(new File("./data/input"));
 		int option = fileChooser.showOpenDialog(this);
 		if(option == JFileChooser.APPROVE_OPTION)
 		{
@@ -184,6 +186,7 @@ public class Main extends javax.swing.JFrame {
 	}
 	
 	private void btnChooseCurrentProyMouseClicked(MouseEvent evt) {
+		fileChooser.setCurrentDirectory(new File("./data/input"));
 		int option = fileChooser.showOpenDialog(this);
 		if(option == JFileChooser.APPROVE_OPTION)
 		{
@@ -193,6 +196,7 @@ public class Main extends javax.swing.JFrame {
 	}
 	
 	private void btnChooseNewProyMouseClicked(MouseEvent evt) {
+		fileChooser.setCurrentDirectory(new File("./data"));
 		int option = fileChooser.showOpenDialog(this);
 		if(option == JFileChooser.APPROVE_OPTION)
 		{
@@ -206,41 +210,51 @@ public class Main extends javax.swing.JFrame {
 		ProgramComparatorFacade facade;
 		ChangeLabel label;
 		List<ProgramPart> parts;
-		try{
+		try
+		{
 			boolean proccesForm=true;
-		if(nameUser.getText()==null || nameUser.getText().equals("")){
-			msj="- Ingrese nombre de Usuario.\n";
-			proccesForm = false;
-		}else{
-			userName=nameUser.getText();
-		}
-		
-		dateObject= (Date) widgetDate.getModel().getValue();
-		if(dateObject==null){
-			msj=msj+"- Ingrese nombre de Usuario.\n";
-			proccesForm = false;
-		}
-		
-		if(pathCurrent==null || pathNew==null || pathOld==null){
-			msj=msj+"- Debe seleccionar las 3 rutas.\n";
-			proccesForm = false;
-		}
-		
-		if(proccesForm){
-			label = new ChangeLabel();
-			parts = new LinkedList<ProgramPart>();
-			facade = new  ProgramComparatorFacade();
-			if(pathCurrent.length()>0 && pathNew.length()>0 && pathOld.length()>0){				
-			   facade.comparePrograms(pathCurrent, pathOld, pathNew, label, parts, "Java",this);	
-			   
+			if(nameUser.getText()==null || nameUser.getText().equals(""))
+			{
+				msj="- Ingrese nombre de Usuario.\n";
+				proccesForm = false;
 			}
-		}else{
-			JOptionPane.showMessageDialog(null,msj, "Error", JOptionPane.ERROR_MESSAGE); 
-		}
+			else
+			{
+				userName=nameUser.getText();
+			}
+			
+			dateObject= (Date) widgetDate.getModel().getValue();
+			if(dateObject==null)
+			{
+				msj=msj+"- Ingrese nombre de Usuario.\n";
+				proccesForm = false;
+			}
+			
+			if(pathCurrent==null || pathNew==null || pathOld==null)
+			{
+				msj=msj+"- Debe seleccionar las 3 rutas.\n";
+				proccesForm = false;
+			}
 		
-		}catch(NullPointerException e){
+			if(proccesForm)
+			{
+				label = new ChangeLabel();
+				parts = new LinkedList<ProgramPart>();
+				facade = new  ProgramComparatorFacade();
+				if(pathCurrent.length()>0 && pathNew.length()>0 && pathOld.length()>0)
+				{				
+					facade.comparePrograms(pathCurrent, pathOld, pathNew, label, parts, "Java",this);	
+				}
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,msj, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		catch(NullPointerException e)
+		{
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
 		}
 	}
 	

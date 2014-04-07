@@ -52,7 +52,7 @@ public class FileManagerJUnit {
 			List<String> tmpList=fileManager.readFile(filePath);
 			assertEquals(3, tmpList.size());
 			assertEquals("line 2;", tmpList.get(1));
-			assertNotEquals("line 3", tmpList.get(2));
+			//assertNotEquals("line 3", tmpList.get(2));
 	    	fileTmp.delete();
 	       }else{
 	    	   assertEquals("Archivo no encontrado", false, true);

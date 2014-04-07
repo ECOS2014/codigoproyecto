@@ -49,8 +49,8 @@ public class ProgramPart
 		String summary;
 		
 		summary = "Total LOC: "+ this.totalLOC +"\n"+
-				 "Total agregadas: "+ this.totalLOCAdded +"\n"+
-				"Total eliminadas: " + this.totalLOCDeleted;
+				 	"Total LOC agregadas: "+ this.totalLOCAdded +"\n"+
+				 	"Total LOC eliminadas: " + this.totalLOCDeleted;
 		
 		return summary;
 				

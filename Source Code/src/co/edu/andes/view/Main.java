@@ -1,10 +1,13 @@
 package co.edu.andes.view;
 import info.clearthought.layout.TableLayout;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -13,7 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
 
+import co.edu.andes.businessRules.PartComparator;
 import co.edu.andes.entities.ChangeLabel;
+import co.edu.andes.entities.Line;
 import co.edu.andes.entities.ProgramPart;
 import co.edu.andes.facade.ProgramComparatorFacade;
 
@@ -31,6 +36,7 @@ import co.edu.andes.facade.ProgramComparatorFacade;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class Main extends javax.swing.JFrame {
+	private static final long serialVersionUID = 1L;
 	private JLabel lblCurrentProy;
 	private JLabel lblOldProy;
 	private JLabel lblNewProy;
@@ -46,7 +52,8 @@ public class Main extends javax.swing.JFrame {
 	private String pathNew;
 	private String pathCurrent;
 	private JFileChooser fileChooser;
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				Main inst = new Main();
@@ -59,8 +66,58 @@ public class Main extends javax.swing.JFrame {
 	public Main() {
 		super();
 		fileChooser = new JFileChooser();
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.setCurrentDirectory(new File("data/input"));
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		initGUI();
+		//testMethod();
+	}
+
+	//TODO delete this after test
+	public void testMethod() 
+	{
+		PartComparator partComparator = new PartComparator();
+		
+		ArrayList<Line> oldPart = new ArrayList<Line>();
+		oldPart.add(new Line("Ejemplo 1", 1));
+		oldPart.add(new Line("Ejemplo 2", 2));
+		oldPart.add(new Line("Ejemplo 3", 3));
+		oldPart.add(new Line("Ejemplo 4", 4));
+		oldPart.add(new Line("Ejemplo 5", 5));
+		oldPart.add(new Line("Ejemplo 6", 6));
+		oldPart.add(new Line("Ejemplo 7", 7));
+		oldPart.add(new Line("Ejemplo 8", 8));
+		oldPart.add(new Line("Ejemplo 9", 9));
+		oldPart.add(new Line("Ejemplo 10", 10));
+		oldPart.add(new Line("Ejemplo 11", 11));
+		oldPart.add(new Line("Ejemplo 12", 12));
+						
+		ArrayList<Line> newPart = new ArrayList<Line>();
+		newPart.add(new Line("Ejemplo 1", 1));
+		newPart.add(new Line("Ejemplo 2", 2));
+		newPart.add(new Line("Ejemplo 13", 3));
+		newPart.add(new Line("Ejemplo 4", 4));
+		newPart.add(new Line("Ejemplo 5", 5));
+		newPart.add(new Line("Ejemplo 6", 6));
+		newPart.add(new Line("Ejemplo 14", 7));
+		newPart.add(new Line("Ejemplo 8", 8));
+		newPart.add(new Line("Ejemplo 9", 9));
+		newPart.add(new Line("Ejemplo 10", 10));
+		newPart.add(new Line("Ejemplo 15", 11));
+		newPart.add(new Line("Ejemplo 12", 12));
+		newPart.add(new Line("Ejemplo 12", 13));
+		newPart.add(new Line("Ejemplo 12", 14));
+		newPart.add(new Line("Ejemplo 12", 15));
+				
+		ProgramPart partSummary = new ProgramPart();
+		
+		ArrayList<String> partWithChanges = new ArrayList<String>();
+		
+		partComparator.compareParts(oldPart, newPart, partSummary, partWithChanges);
+		
+		System.out.println(partSummary);
+		//System.out.println(partWithChanges);
+		Line.printArray("oldPart", oldPart);
+		Line.printArray("newPart", newPart);
 	}
 
 	private void initGUI() {
@@ -140,6 +197,7 @@ public class Main extends javax.swing.JFrame {
 	}
 
 	private void btnChooseOldProyMouseClicked(MouseEvent evt) {
+		fileChooser.setCurrentDirectory(new File("data/input"));
 		int option = fileChooser.showOpenDialog(this);
 		if(option == JFileChooser.APPROVE_OPTION)
 		{
@@ -149,6 +207,7 @@ public class Main extends javax.swing.JFrame {
 	}
 	
 	private void btnChooseCurrentProyMouseClicked(MouseEvent evt) {
+		fileChooser.setCurrentDirectory(new File("data/input"));
 		int option = fileChooser.showOpenDialog(this);
 		if(option == JFileChooser.APPROVE_OPTION)
 		{
@@ -158,6 +217,7 @@ public class Main extends javax.swing.JFrame {
 	}
 	
 	private void btnChooseNewProyMouseClicked(MouseEvent evt) {
+		fileChooser.setCurrentDirectory(new File("data/output"));
 		int option = fileChooser.showOpenDialog(this);
 		if(option == JFileChooser.APPROVE_OPTION)
 		{

@@ -1,5 +1,6 @@
 package co.edu.andes.businessRules;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.andes.entities.Line;
@@ -17,30 +18,41 @@ public class PartComparator
 	 */
 	public void compareParts(List<Line> oldPart, List<Line> newPart, ProgramPart partSummary, List<String> partWithChanges)
 	{
+		System.out.println("---------------- compareParts(Begin) ----------------");
 		int linesAdded;
 		int linesDeleted;
 		int totalLOC; 
 		int counterChange;
 		counterChange = 0;
 
-		linesAdded = this.getTotalAdded(oldPart, newPart, partWithChanges, counterChange);
-		linesDeleted = this.getTotalDeleted(oldPart, newPart, partWithChanges, linesAdded);
+		ArrayList<Line> comparsionResultLines = new ArrayList<Line>(); 
+		linesDeleted = this.getTotalDeleted(oldPart, newPart, comparsionResultLines, counterChange);
+		linesAdded = this.getTotalAdded(oldPart, newPart, comparsionResultLines, counterChange);
 		totalLOC = newPart.size();
 		 
 		partSummary.setTotalLOC(totalLOC);
 		partSummary.setTotalLOCAdded(linesAdded);
 		partSummary.setTotalLOCDeleted(linesDeleted);
+		
+		Line.sortArray(comparsionResultLines);	
+		Line.printArray("oldPart", comparsionResultLines);
+		partWithChanges = Line.toStringArray(comparsionResultLines);
+		System.out.println(partWithChanges);
+		System.out.println("----------------- compareParts(End) -----------------");
+		System.out.println("");
 	}
 
 	/**Obtiene el numero de lineas que fueron borradas de un archivo
-	 * @param oldVersion
-	 * @param currentVersion
-	 * @param partWithChanges
+	 * @param lastVersionPartLines
+	 * @param currentVersionPartLines
+	 * @param comparsionResultLines
 	 * @param counterChange
 	 * @return
 	 */
-	private int getTotalDeleted(List<Line> oldVersion, List<Line> currentVersion, List<String> partWithChanges, Integer counterChange)
+	private int getTotalDeleted(List<Line> lastVersionPartLines, List<Line> currentVersionPartLines, List<Line> comparsionResultLines, Integer counterChange)
 	{
+		return compareLineSetAgainstLineSet(lastVersionPartLines, currentVersionPartLines, LineType.Deleted, LineType.Unchanged, LineType.None, comparsionResultLines, counterChange);		
+		/*
 		int size;		
 		int sizeCurrent;
 		size = oldVersion.size();
@@ -66,18 +78,22 @@ public class PartComparator
 			}
 		}
 		return totalLineDeleted;
-
+		 */
 	}
 
+	
+	
 	/**Obtiene el numero de lineas que fueron agregadas
 	 * @param oldVersion 
 	 * @param currentVersion
-	 * @param partWithChanges
+	 * @param comparsionResultLines
 	 * @param counterChange
 	 * @return
 	 */
-	private int getTotalAdded(List<Line> oldVersion, List<Line> currentVersion, List<String> partWithChanges, Integer counterChange)
+	private int getTotalAdded(List<Line> lastVersionPartLines, List<Line> currentVersionPartLines, List<Line> comparsionResultLines, Integer changeNumber)
 	{
+		return compareLineSetAgainstLineSet(currentVersionPartLines, lastVersionPartLines, LineType.Added, LineType.Unchanged, LineType.None, comparsionResultLines, changeNumber);
+		/*
 		int size;		
 		int sizeOld;
 		size = currentVersion.size();
@@ -104,5 +120,82 @@ public class PartComparator
 			partWithChanges.add(current.getContent());
 		}
 		return totalLineAdded;
+		*/
+	}
+	
+	/**
+	 * Compara una lista de lineas contra otra lista, devuelve el numero de lineas que no fueron encontradas de la lista "startLineSet" en la lista "againstLineSet"
+	 * @param startLineSet lista inicial de comparacion
+	 * @param againstLineSet lista contra la cual se compara la inicial
+	 * @param markWhenNotFound marka que reciben las lineas de la linea original cuando no son encontradas en la lisra "againstLineSet" 
+	 * @param markWhenFound marka que reciben las lineas de la linea original cuando son encontradas en la lisra "againstLineSet"
+	 * @param includeCriterion marka que deben tener las lineas de la lista orinal para ser incluidas en la comparacion
+	 * @return el numero de lineas que despues de la comparacion tienen la marca markWhenNotFound
+	 */
+	private static int compareLineSetAgainstLineSet(List<Line>startLineSet, List<Line> againstLineSet, LineType markWhenNotFound, LineType markWhenFound, LineType includeCriterion, List<Line> comparsionResultLines, int changeNumber)
+	{
+		int notFoundCount = 0;
+		int m = startLineSet.size();
+		
+		for (int i = 0; i < m; i++)
+		{
+			Line tempLine = startLineSet.get(i);
+			if (tempLine.getCurrentLineType() == includeCriterion)
+			{
+				Line comparsionResultLine = compareLineAgainstLineSet(tempLine, againstLineSet, markWhenNotFound, markWhenFound, includeCriterion);
+				if (comparsionResultLine.getCurrentLineType() == markWhenNotFound)
+				{
+					notFoundCount++;
+					comparsionResultLine.setChangeNumber(changeNumber);
+					comparsionResultLines.add(comparsionResultLine);
+				}
+			}
+		}
+		
+		return notFoundCount;
+	}
+	
+	/**
+	 * 
+	 * @param line
+	 * @param lineSet
+	 * @param markWhenNotFound
+	 * @param markWhenFound
+	 * @param includeCriterion
+	 * @return
+	 */
+	/**
+	 * @param line
+	 * @param lineSet
+	 * @param markWhenNotFound
+	 * @param markWhenFound
+	 * @param includeCriterion
+	 * @return
+	 */
+	private static Line compareLineAgainstLineSet(Line line, List<Line> lineSet,LineType markWhenNotFound, LineType markWhenFound, LineType includeCriterion)
+	{
+		int m = lineSet.size();
+		Line comparsionResultLine = new Line(line.getContent(), line.getLocation());		
+		
+		boolean wasFound = false;
+		for (int i = 0; !wasFound && i < m; i++ )
+		{
+			Line tempLine = lineSet.get(i);
+			if (tempLine.getCurrentLineType() == includeCriterion && tempLine.equals(line))
+			{
+				wasFound = true;
+				comparsionResultLine.setCurrentLineType(markWhenFound);
+				line.setCurrentLineType(markWhenFound);
+				tempLine.setCurrentLineType(markWhenFound);
+			}
+		}
+		
+		if (!wasFound)
+		{
+			comparsionResultLine.setCurrentLineType(markWhenNotFound);
+			line.setCurrentLineType(markWhenNotFound);
+		}
+		
+		return comparsionResultLine;
 	}
 }

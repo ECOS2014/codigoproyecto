@@ -3,6 +3,7 @@ package co.edu.andes.businessRules;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.andes.entities.LanguageType;
 import co.edu.andes.entities.Line;
 
 public class JavaLOCCounter extends LOCCounter 
@@ -13,25 +14,26 @@ public class JavaLOCCounter extends LOCCounter
 	 */
 	public List<Line> getLogicLines(List<String> lines)
 	{
-		List<Line> linesConverted;
-		int size;
-		int position;
-		String line;
-		boolean isValid;
-		linesConverted = new ArrayList<Line>();
-		size = lines.size();
-		
-		position=0;
-		
-		while(position <size)
+		List<Line> linesConverted = new ArrayList<Line>();
+		if (lines != null)
 		{
-			line = lines.get(position);
-			isValid = this.isValidLine(line);
-			if(isValid)
-				linesConverted.add(new Line(lines.get(position), position));
-			position ++;
-		}
-		
+			int size;
+			int position;
+			String line;
+			boolean isValid;
+			size = lines.size();
+			
+			position=0;
+			
+			while(position <size)
+			{
+				line = lines.get(position);
+				isValid = this.isValidLine(line);
+				if(isValid)
+					linesConverted.add(new Line(lines.get(position), position));
+				position ++;
+			}
+		}		
 		return linesConverted;
 	}
 
@@ -40,7 +42,8 @@ public class JavaLOCCounter extends LOCCounter
 	 * @param line
 	 * @return
 	 */
-	private boolean isValidLine(String line) {
+	private boolean isValidLine(String line) 
+	{
 		boolean isvalidLine;
 		isvalidLine = true;
 		line = line.trim();
@@ -58,6 +61,12 @@ public class JavaLOCCounter extends LOCCounter
 		}
 		
 		return isvalidLine;
+	}
+
+	@Override
+	public LanguageType getLanguaje() 
+	{
+		return LanguageType.Java;
 	}
 	
 	

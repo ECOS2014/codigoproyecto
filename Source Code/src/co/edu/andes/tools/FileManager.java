@@ -20,42 +20,46 @@ public class FileManager
 	 */
 	public static List<String> readFile(String filePath)
 	{
-
 		List<String> lines = new LinkedList<String>();
-		BufferedReader buffer=null;
-		InputStream inputStream;
-		InputStreamReader inputStreamReader;
-		try
+		
+		if (filePath != null)
 		{
-			inputStream=new FileInputStream(filePath); 
-			inputStreamReader = new InputStreamReader(inputStream);
-			buffer=new BufferedReader(inputStreamReader);
-			String line;
-			line = buffer.readLine();
-			while (line != null)
+			BufferedReader buffer=null;
+			InputStream inputStream;
+			InputStreamReader inputStreamReader;
+			try
 			{
-				lines.add(line);
+				inputStream=new FileInputStream(filePath); 
+				inputStreamReader = new InputStreamReader(inputStream);
+				buffer=new BufferedReader(inputStreamReader);
+				String line;
 				line = buffer.readLine();
-			}
-		}       
-		catch (Exception e)
-		{
-			System.out.println(e.toString());
-		}
-		finally
-		{
-			if(buffer!=null)
+				while (line != null)
+				{
+					lines.add(line);
+					line = buffer.readLine();
+				}
+			}       
+			catch (Exception e)
 			{
-				try 
+				System.out.println(e.toString());
+			}
+			finally
+			{
+				if(buffer!=null)
 				{
-					buffer.close();
-				} 
-				catch (IOException e) 
-				{
-					e.printStackTrace();
+					try 
+					{
+						buffer.close();
+					} 
+					catch (IOException e) 
+					{
+						e.printStackTrace();
+					}
 				}
 			}
 		}
+		
 		return lines;
 	}
 

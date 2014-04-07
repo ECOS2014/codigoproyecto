@@ -47,11 +47,15 @@ public class ProgramComparator
 		File lastVersionDirectory  = new File(pathOldProgram);
 		GetClassFilesFromDir(lastVersion, lastVersionDirectory, lastVersionDirectory.getAbsolutePath());
 		
-		compareNewAndModifiedParts();
+		compareNewAndModifiedParts(pathResultProgram);
 		compareDeletedParts();
 	}
 	
-	private void compareNewAndModifiedParts() 
+	/**
+	 * Compara el proyecto nuevo vs la version antigua en busca de las clases nuevas y las clases modificadas.
+	 * @param outputProgramDirectory ruta del directorio de salida donde se debe generar la copia del proyecto con los headers.
+	 */
+	private void compareNewAndModifiedParts(String outputProgramDirectory) 
 	{
 		int m = currentVersion.partsCount();
 		
@@ -68,12 +72,16 @@ public class ProgramComparator
 			compareFiles(lastVersionFilePtah, currentVersionFilePtah, partWithChanges, part);
 			
 			System.out.println(part.toString());
-			//TODO Uncomment
-			/*
-			this.saveFile(outputSourceFileLines, pathResultProgram);
-			*/
+			
+			this.saveFile(outputProgramDirectory + currentVersionName, part);
 		}
 	}
+	
+	private void saveFile(String filePath, ProgramPart part) 
+	{
+		FileManager.saveFile(filePath, part);
+	}
+	
 	
 	private void compareDeletedParts() 
 	{

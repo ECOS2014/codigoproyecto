@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
+import co.edu.andes.entities.ProgramPart;
+
 public class FileManager 
 {
 	/**
@@ -90,6 +92,34 @@ public class FileManager
 			bufferedWriter.close();
 		} catch (IOException e1) {
 			System.out.print("error al guardar el archivo "+filePath);
+		}
+	}
+
+	/**
+	 * 
+	 * @param filePath
+	 * @param part
+	 */
+	public static void saveFile(String filePath, ProgramPart part) 
+	{
+		System.out.print("Creating a file: " + filePath);
+		
+		File newFile = new File(filePath);
+		try 
+		{
+			newFile.getParentFile().mkdir();			
+			newFile.createNewFile();
+			FileWriter fileWriter= new FileWriter(newFile.getAbsoluteFile());
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			
+			bufferedWriter.write(part.toString());
+			
+			bufferedWriter.close();
+			fileWriter.close();			
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
 		}
 	}
 }

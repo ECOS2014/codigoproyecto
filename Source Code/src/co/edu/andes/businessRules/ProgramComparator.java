@@ -12,7 +12,9 @@ import co.edu.andes.tools.FileManager;
 public class ProgramComparator 
 {
 	private PartComparator partComparator;
-	private LOCCounter locCounter; 
+	private LOCCounter locCounter;
+	public ProgramPart globalPartSumary;
+		
 
 
 	public ProgramComparator() {
@@ -39,6 +41,7 @@ public class ProgramComparator
 		
 		System.out.print(part.toString());
 		this.saveFile(newFile, pathResultProgram);
+		globalPartSumary = part;
 	}
 
 	/**obtiene las lineas de un archivo

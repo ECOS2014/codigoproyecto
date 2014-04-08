@@ -1,5 +1,9 @@
 package co.edu.andes.entities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ProgramPart 
 {
 	private String partName;
@@ -46,14 +50,23 @@ public class ProgramPart
 	
 	@Override
 	public String toString(){
-		String summary;
+		String summary = "/**\n" +
+			" * Change number: " + "\n" +
+			" * Change date: " + this.getDate() + "\n" +
+			" * Change description: " + "\n" +
+			" * Change author: " + "\n" +
+			" * Total LOC agregadas: "+ this.totalLOCAdded + "\n" +
+			" * Total LOC eliminadas: " + this.totalLOCDeleted + "\n" +
+			" * Total LOC: "+ this.totalLOC + "\n" +
+			" */\n";
 		
-		summary = "Total LOC: "+ this.totalLOC +"\n"+
-				 	"Total LOC agregadas: "+ this.totalLOCAdded +"\n"+
-				 	"Total LOC eliminadas: " + this.totalLOCDeleted + "\n";
-		
-		return summary;
-				
-		 
+		return summary;		 
+	}
+
+	private String getDate() 
+	{
+		DateFormat dateFormat =  new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		Date date = new Date();
+		return dateFormat.format(date);
 	}
 }

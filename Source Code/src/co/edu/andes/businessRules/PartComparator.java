@@ -1,6 +1,5 @@
 package co.edu.andes.businessRules;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.andes.entities.Line;
@@ -16,7 +15,7 @@ public class PartComparator
 	 * @param partSummary
 	 * @param partWithChanges
 	 */
-	public void compareParts(List<Line> oldPart, List<Line> newPart, ProgramPart partSummary, List<String> partWithChanges)
+	public void compareParts(List<Line> oldPart, List<Line> newPart, ProgramPart partSummary, List<Line> comparsionResultLines)
 	{
 		System.out.println("---------------- compareParts(Begin) ----------------");
 		int linesAdded;
@@ -25,19 +24,16 @@ public class PartComparator
 		int counterChange;
 		counterChange = 0;
 
-		ArrayList<Line> comparsionResultLines = new ArrayList<Line>(); 
 		linesDeleted = this.getTotalDeleted(oldPart, newPart, comparsionResultLines, counterChange);
 		linesAdded = this.getTotalAdded(oldPart, newPart, comparsionResultLines, counterChange);
+		
+		Line.sortArray(comparsionResultLines);
+		
 		totalLOC = newPart.size();
-		 
 		partSummary.setTotalLOC(totalLOC);
 		partSummary.setTotalLOCAdded(linesAdded);
 		partSummary.setTotalLOCDeleted(linesDeleted);
 		
-		Line.sortArray(comparsionResultLines);	
-		Line.printArray("oldPart", comparsionResultLines);
-		partWithChanges = Line.toStringArray(comparsionResultLines);
-		System.out.println(partWithChanges);
 		System.out.println("----------------- compareParts(End) -----------------");
 		System.out.println("");
 	}

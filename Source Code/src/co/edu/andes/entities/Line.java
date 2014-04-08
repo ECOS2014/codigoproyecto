@@ -1,6 +1,7 @@
 package co.edu.andes.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Line 
 {
@@ -105,14 +106,14 @@ public class Line
 	/**
 	 * Imprime por consola un array de lineas
 	 * @param name
-	 * @param lines
+	 * @param comparsionLines
 	 */
-	public static void printArray( String name, ArrayList<Line> lines)
+	public static void printArray( String name, List<Line> comparsionLines)
 	{
 		System.out.println("Array name: " + name);
 		System.out.println("{");
 		
-		for(Line line : lines)
+		for(Line line : comparsionLines)
 		{
 			System.out.println("  " + line);
 		}
@@ -124,7 +125,7 @@ public class Line
 	 * Ordena un list de lineas por su ubicacion dentro del archivo
 	 * @param lines
 	 */
-	public static void sortArray(ArrayList<Line> lines)
+	public static void sortArray(List<Line> lines)
 	{
 		for(int i = lines.size(); i > 0; i--)
         {
@@ -160,5 +161,19 @@ public class Line
 		}
 		
 		return strLines;
+	}
+
+	public String toLineLabel() 
+	{
+		String linelabel = "// line ";
+		
+		if (currentLineType == LineType.Deleted)
+		{
+			linelabel += (content + " ");
+		}
+		
+		linelabel += " was " + currentLineType.name().toLowerCase() + " at [" + changeNumber +"]";
+		
+		return linelabel;
 	}
 }

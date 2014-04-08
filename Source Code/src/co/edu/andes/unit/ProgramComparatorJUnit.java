@@ -59,7 +59,7 @@ public class ProgramComparatorJUnit {
 		newFile = new ArrayList<String>();
 		part = new  ProgramPart();
 		part.setPartName("functionTest");
-		partComparator.compareParts(oldVersion, currentVersion, part, newFile);
+		//partComparator.compareParts(oldVersion, currentVersion, part, newFile);
 		assertEquals(4, part.getTotalLOC());
 		assertEquals(2, part.getTotalLOCAdded());
 		assertEquals(2, part.getTotalLOCDeleted());
@@ -95,7 +95,7 @@ public class ProgramComparatorJUnit {
 		newFile = new ArrayList<String>();
 		part = new  ProgramPart();
 		part.setPartName("functionTest2");
-		partComparator.compareParts(oldVersion, currentVersion, part, newFile);
+		//partComparator.compareParts(oldVersion, currentVersion, part, newFile);
 		assertEquals(4, part.getTotalLOC());
 		assertEquals(1, part.getTotalLOCAdded());
 		assertEquals(1, part.getTotalLOCDeleted());
@@ -131,7 +131,7 @@ public class ProgramComparatorJUnit {
 		newFile = new ArrayList<String>();
 		part = new  ProgramPart();
 		part.setPartName("functionTest3");
-		partComparator.compareParts(oldVersion, currentVersion, part, newFile);
+		//partComparator.compareParts(oldVersion, currentVersion, part, newFile);
 		assertEquals(4, part.getTotalLOC());
 		assertEquals(4, part.getTotalLOCAdded());
 		assertEquals(4, part.getTotalLOCDeleted());

@@ -66,20 +66,20 @@ public class ProgramComparator
 			String currentVersionFilePtah = currentVersion.getFilePathOf(currentVersionName);
 			String lastVersionFilePtah = lastVersion.getFilePathOf(currentVersionName);
 			
-			List<String> partWithChanges = new ArrayList<String>();
+			List<Line> partWithChanges = new ArrayList<Line>();
 			ProgramPart part = new ProgramPart();
 			
 			compareFiles(lastVersionFilePtah, currentVersionFilePtah, partWithChanges, part);
 			
 			System.out.println(part.toString());
 			
-			this.saveFile(outputProgramDirectory + currentVersionName, part);
+			this.saveFile(currentVersionFilePtah, outputProgramDirectory + currentVersionName, part, partWithChanges);
 		}
 	}
 	
-	private void saveFile(String filePath, ProgramPart part) 
+	private void saveFile(String currentVersionFilePath, String outputFilePath, ProgramPart part, List<Line> comparsionLines) 
 	{
-		FileManager.saveFile(filePath, part);
+		FileManager.saveFile(currentVersionFilePath, outputFilePath, part, comparsionLines);
 	}
 	
 	
@@ -95,7 +95,7 @@ public class ProgramComparator
 			{
 				String lastVersionFilePath = lastVersion.getFilePathOf(lastVersionPartName);
 				
-				List<String> partWithChanges = new ArrayList<String>();
+				List<Line> partWithChanges = new ArrayList<Line>();
 				ProgramPart part = new ProgramPart();
 				
 				compareFiles(lastVersionFilePath, currentVersionFilePath, partWithChanges, part);
@@ -157,25 +157,13 @@ public class ProgramComparator
 	 * @param partWithChanges
 	 * @param part
 	 */
-	private void compareFiles(String pathOldFile, String pathNewFile, List<String> partWithChanges, ProgramPart part)
+	private void compareFiles(String pathOldFile, String pathNewFile, List<Line> partWithChanges, ProgramPart part)
 	{
-		List<Line> linesOld;
-		List<Line> linesNew;
-		linesOld = locCounter.getLogicLines(FileManager.readFile(pathOldFile)); 
-		linesNew = locCounter.getLogicLines(FileManager.readFile(pathNewFile));
+		List<Line> linesOld = locCounter.getLogicLines(FileManager.readFile(pathOldFile));
+		List<Line> linesNew = locCounter.getLogicLines(FileManager.readFile(pathNewFile));
+		
 		partComparator.compareParts(linesOld, linesNew, part, partWithChanges);
 	}
-
-	/**
-	 * Guarda un archivo
-	 * @param part
-	 * @param path
-	 */
-	private void saveFile(List<String> part, String path)
-	{
-		FileManager.saveFile(part, path);
-	}
-
 
 	/**
 	 * Obtiene el tipo de lenguaje que se va comparar

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +12,7 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
+import co.edu.andes.entities.Line;
 import co.edu.andes.entities.ProgramPart;
 
 public class FileManager 
@@ -100,19 +102,53 @@ public class FileManager
 	 * @param filePath
 	 * @param part
 	 */
-	public static void saveFile(String filePath, ProgramPart part) 
+	public static void saveFile(String currentVersionFilepath, String outputFilePath, ProgramPart part, List<Line> comparsionLines) 
 	{
-		System.out.print("Creating a file: " + filePath);
-		
-		File newFile = new File(filePath);
+		System.out.print("Creating a file: " + outputFilePath);
+		Line.printArray("Lines to save", comparsionLines); 
+		File outputFile = new File(outputFilePath);
+		File currentVersionFile = new File(currentVersionFilepath);
 		try 
 		{
-			newFile.getParentFile().mkdir();			
-			newFile.createNewFile();
-			FileWriter fileWriter= new FileWriter(newFile.getAbsoluteFile());
+			outputFile.getParentFile().mkdir();			
+			outputFile.createNewFile();
+			FileWriter fileWriter= new FileWriter(outputFile.getAbsoluteFile());
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
+			FileReader fileReader = new FileReader(currentVersionFile);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			
 			bufferedWriter.write(part.toString());
+			
+			int location = 0;
+			int comparsionLineIndex = 0;
+			String line = bufferedReader.readLine();
+			
+			while(line!=null)
+			{
+				Line tempLine = comparsionLines.get(comparsionLineIndex); 
+				while (tempLine != null && tempLine.getLocation() == location)
+				{
+					bufferedWriter.write(FileManager.getStringWithTabs(FileManager.getTabsAtLine(line)) + tempLine.toLineLabel() + "\n");
+						
+					comparsionLineIndex++;
+					if (comparsionLineIndex < comparsionLines.size())
+					{
+						tempLine = comparsionLines.get(comparsionLineIndex);
+					}
+					else
+					{
+						tempLine = null;
+					}
+				}
+				
+				bufferedWriter.write(line + "\n");
+				line = bufferedReader.readLine();			
+				location++;
+			}
+			
+			bufferedReader.close();
+			fileReader.close();
 			
 			bufferedWriter.close();
 			fileWriter.close();			
@@ -121,5 +157,41 @@ public class FileManager
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 
+	 * @param line
+	 * @return
+	 */
+	private static int getTabsAtLine(String line)
+	{
+		int index = 0;
+		
+		while (index < line.length() && line.charAt(index) == '\t')
+		{
+			index++;
+		}
+		
+		return index;
+	}
+
+	/**
+	 * 
+	 * @param numberOfTabs
+	 * @return
+	 */
+	private static String getStringWithTabs(int numberOfTabs)
+	{
+		String tabs = "";
+		int added = 0;
+		
+		while (added < numberOfTabs)
+		{
+			tabs += "\t";
+			added++;
+		}
+		
+		return tabs;
 	}
 }

@@ -64,7 +64,7 @@ public class Main extends javax.swing.JFrame {
 	private String userName;
 	private Date dateObject;
 	private JFileChooser fileChooser;
-	public static void main(String[] args) {
+	public static void notmain(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				Main inst = new Main();
@@ -243,7 +243,7 @@ public class Main extends javax.swing.JFrame {
 				facade = new  ProgramComparatorFacade();
 				if(pathCurrent.length()>0 && pathNew.length()>0 && pathOld.length()>0)
 				{				
-					facade.comparePrograms(pathCurrent, pathOld, pathNew, label, parts, "Java",this);	
+					//facade.comparePrograms(pathCurrent, pathOld, pathNew, label, parts, "Java",this);	
 				}
 			}
 			else

@@ -22,7 +22,7 @@ public class PartComparator
 		int linesDeleted;
 		int totalLOC; 
 		int counterChange;
-		counterChange = 0;
+		counterChange = partSummary.getChangeNumber();
 
 		linesDeleted = this.getTotalDeleted(oldPart, newPart, comparsionResultLines, counterChange);
 		linesAdded = this.getTotalAdded(oldPart, newPart, comparsionResultLines, counterChange);
@@ -136,6 +136,7 @@ public class PartComparator
 		for (int i = 0; i < m; i++)
 		{
 			Line tempLine = startLineSet.get(i);
+			tempLine.setChangeNumber(changeNumber);
 			if (tempLine.getCurrentLineType() == includeCriterion)
 			{
 				Line comparsionResultLine = compareLineAgainstLineSet(tempLine, againstLineSet, markWhenNotFound, markWhenFound, includeCriterion);

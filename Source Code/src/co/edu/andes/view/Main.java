@@ -238,7 +238,7 @@ public class Main extends javax.swing.JFrame {
 		
 			if(proccesForm)
 			{
-				label = new ChangeLabel();
+				//label = new ChangeLabel();
 				parts = new LinkedList<ProgramPart>();
 				facade = new  ProgramComparatorFacade();
 				if(pathCurrent.length()>0 && pathNew.length()>0 && pathOld.length()>0)

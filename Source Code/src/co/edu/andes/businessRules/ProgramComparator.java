@@ -33,11 +33,11 @@ public class ProgramComparator
 	 * @param pathOldProgram
 	 * @param pathNewProgram
 	 * @param pathResultProgram
-	 * @param changeLabel
+	 * @param outChangeLabel
 	 * @param parts
 	 * @param language
 	 */
-	public void comparePrograms(String pathOldProgram, String pathNewProgram, String pathResultProgram, ChangeLabel changeLabel, List<ProgramPart> parts, String language)
+	public void comparePrograms(String pathOldProgram, String pathNewProgram, String pathHeaderNewProgram, String pathResultProgram, ChangeLabel outChangeLabel, List<ProgramPart> parts, String language)
 	{
 		locCounter = FactoryLOCCounter.createCounterLOC(getTypeLanguage(language));
 				
@@ -47,15 +47,20 @@ public class ProgramComparator
 		File lastVersionDirectory  = new File(pathOldProgram);
 		GetClassFilesFromDir(lastVersion, lastVersionDirectory, lastVersionDirectory.getAbsolutePath());
 		
-		compareNewAndModifiedParts(pathResultProgram);
-		compareDeletedParts();
+		compareNewAndModifiedParts(pathResultProgram, outChangeLabel);
+		compareDeletedParts(outChangeLabel);
+		
+		
+		String programHeaderOutputPath = pathResultProgram + pathHeaderNewProgram.substring(pathNewProgram.length());
+		System.out.println(programHeaderOutputPath);
+		//FileManager.printChangeLogOnHeader(programHeaderOutputPath, outChangeLabel.toString());
 	}
 	
 	/**
 	 * Compara el proyecto nuevo vs la version antigua en busca de las clases nuevas y las clases modificadas.
 	 * @param outputProgramDirectory ruta del directorio de salida donde se debe generar la copia del proyecto con los headers.
 	 */
-	private void compareNewAndModifiedParts(String outputProgramDirectory) 
+	private void compareNewAndModifiedParts(String outputProgramDirectory, ChangeLabel outChangeLabel) 
 	{
 		int m = currentVersion.partsCount();
 		
@@ -68,22 +73,20 @@ public class ProgramComparator
 			
 			List<Line> partWithChanges = new ArrayList<Line>();
 			ProgramPart part = new ProgramPart();
+			part.setChangeAuthor(outChangeLabel.getChangeAuthor());
+			part.setChangeNumber(outChangeLabel.getChangeNumber());
+			part.setChangeDescription(outChangeLabel.getChangeDescription());
 			
 			compareFiles(lastVersionFilePtah, currentVersionFilePtah, partWithChanges, part);
 			
 			System.out.println(part.toString());
 			
-			this.saveFile(currentVersionFilePtah, outputProgramDirectory + currentVersionName, part, partWithChanges);
+			saveFile(currentVersionFilePtah, outputProgramDirectory + currentVersionName, part, partWithChanges);
+			outChangeLabel.addPart(part);
 		}
 	}
 	
-	private void saveFile(String currentVersionFilePath, String outputFilePath, ProgramPart part, List<Line> comparsionLines) 
-	{
-		FileManager.saveFile(currentVersionFilePath, outputFilePath, part, comparsionLines);
-	}
-	
-	
-	private void compareDeletedParts() 
+	private void compareDeletedParts(ChangeLabel outChangeLabel) 
 	{
 		int m = lastVersion.partsCount();
 		
@@ -97,12 +100,29 @@ public class ProgramComparator
 				
 				List<Line> partWithChanges = new ArrayList<Line>();
 				ProgramPart part = new ProgramPart();
+				part.setChangeAuthor(outChangeLabel.getChangeAuthor());
+				part.setChangeNumber(outChangeLabel.getChangeNumber());
+				part.setChangeDescription(outChangeLabel.getChangeDescription());
 				
 				compareFiles(lastVersionFilePath, currentVersionFilePath, partWithChanges, part);
 				
-				System.out.println(part.toString());				
+				System.out.println(part.toString());
+				
+				outChangeLabel.addPart(part);
 			}
 		}
+	}
+	
+	/**
+	 * Guarda el archivo de salida con el resultado de las comparaciones.
+	 * @param currentVersionFilePath
+	 * @param outputFilePath
+	 * @param part
+	 * @param comparsionLines
+	 */
+	private void saveFile(String currentVersionFilePath, String outputFilePath, ProgramPart part, List<Line> comparsionLines) 
+	{
+		FileManager.saveFile(currentVersionFilePath, outputFilePath, part, comparsionLines);
 	}
 	
 	/**

@@ -35,7 +35,7 @@ public class PanelOutput extends JPanel implements ActionListener
 		
 		JPanel panelNorth = new JPanel();
 		panelNorth.setLayout(new BorderLayout());
-		outputDirectoryPath = new PanelInputDirectoryPath("Directorio resultado:", "./data/output", true);
+		outputDirectoryPath = new PanelInputDirectoryPath("Directorio resultado:", "./data", true);
 		panelNorth.add(outputDirectoryPath, BorderLayout.NORTH);
 				
 		btnCompare = new JButton("Comparar versiones");

@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -193,5 +194,27 @@ public class FileManager
 		}
 		
 		return tabs;
+	}
+
+	/**
+	 * Prints the change log ont he header
+	 * @param pathHeaderNewProgram
+	 * @param string
+	 */
+	public static void printChangeLogOnHeader(String pathHeaderNewProgram, String changeLabel) 
+	{
+		File outputFile = new File(pathHeaderNewProgram);
+		
+		try 
+		{
+			RandomAccessFile rndAccesFile = new RandomAccessFile(outputFile, "rw");
+			rndAccesFile.seek(0);
+			rndAccesFile.write(changeLabel.getBytes());
+			rndAccesFile.close();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 }

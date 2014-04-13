@@ -60,10 +60,10 @@ public class ProgramComparatorGUI extends JFrame
 			canComparePrograms(currentVersionHeader, "Ruta del header actual invalida") && 
 			canComparePrograms(lastVersionDirectoryPath, "Ruta del directorio anterior invalida"))
 		{
-			ChangeLabel outChangeLabel = new ChangeLabel(); 
+			ChangeLabel outChangeLabel = new ChangeLabel(authorName, changeNumber, changeDescription);
 			List<ProgramPart> outParts = new ArrayList<ProgramPart>();
 			ProgramComparatorFacade.comparePrograms(currentVersionDirectoryPath, currentVersionHeader, lastVersionDirectoryPath, outputVersionDirectoryPath, outChangeLabel, outParts, LanguageType.Java.name());
-			
+			panelOutput.setChangeLabel(outChangeLabel.toString());
 		}		
 	}
 
@@ -85,9 +85,7 @@ public class ProgramComparatorGUI extends JFrame
 			return false;
 		}
 	}
-
-
-
+	
 	/**
 	 * 
 	 * @param input

@@ -7,6 +7,9 @@ import java.util.Date;
 public class ProgramPart 
 {
 	private String partName;
+	private int changeNumber;
+	private String changeDescription;
+	private String changeAuthor;
 	private int totalLOCAdded;
 	private int totalLOCDeleted;
 	private int totalLOC;
@@ -15,7 +18,22 @@ public class ProgramPart
 	public void setPartName(String partName) {
 		this.partName = partName;
 	}
+	
+	public void setChangeNumber(int changeNumber)
+	{
+		this.changeNumber = changeNumber;
+	}
 
+	public void setChangeDescription(String changeDescription)
+	{
+		this.changeDescription = changeDescription;
+	}
+	
+	public void setChangeAuthor(String changeAuthor)
+	{
+		this.changeAuthor = changeAuthor;
+	}
+	
 	public void setTotalLOCAdded(int totalLOCAdded) {
 		this.totalLOCAdded = totalLOCAdded;
 	}
@@ -48,13 +66,18 @@ public class ProgramPart
 		return totalLOC;
 	}	
 	
+	public int getChangeNumber()
+	{
+		return changeNumber;
+	}
+	
 	@Override
 	public String toString(){
 		String summary = "/**\n" +
-			" * Change number: " + "\n" +
+			" * Change number: " + changeNumber + "\n" +
 			" * Change date: " + this.getDate() + "\n" +
-			" * Change description: " + "\n" +
-			" * Change author: " + "\n" +
+			" * Change description: " + changeDescription + "\n" +
+			" * Change author: " + changeAuthor + "\n" +
 			" * Total LOC agregadas: "+ this.totalLOCAdded + "\n" +
 			" * Total LOC eliminadas: " + this.totalLOCDeleted + "\n" +
 			" * Total LOC: "+ this.totalLOC + "\n" +

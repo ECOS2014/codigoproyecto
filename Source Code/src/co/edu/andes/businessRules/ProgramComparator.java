@@ -53,7 +53,7 @@ public class ProgramComparator
 		
 		String programHeaderOutputPath = pathResultProgram + pathHeaderNewProgram.substring(pathNewProgram.length());
 		System.out.println(programHeaderOutputPath);
-		//FileManager.printChangeLogOnHeader(programHeaderOutputPath, outChangeLabel.toString());
+		FileManager.printChangeLogOnHeader(programHeaderOutputPath, outChangeLabel.toString());
 	}
 	
 	/**

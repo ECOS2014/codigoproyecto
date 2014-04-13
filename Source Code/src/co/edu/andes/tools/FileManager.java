@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -203,14 +202,24 @@ public class FileManager
 	 */
 	public static void printChangeLogOnHeader(String pathHeaderNewProgram, String changeLabel) 
 	{
+		List<String> fileLines = readFile(pathHeaderNewProgram);
+		
 		File outputFile = new File(pathHeaderNewProgram);
 		
 		try 
 		{
-			RandomAccessFile rndAccesFile = new RandomAccessFile(outputFile, "rw");
-			rndAccesFile.seek(0);
-			rndAccesFile.write(changeLabel.getBytes());
-			rndAccesFile.close();
+			FileWriter fileWriter= new FileWriter(outputFile.getAbsoluteFile());
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			
+			bufferedWriter.write(changeLabel.toString());
+			
+			for (String line:fileLines)
+			{
+				bufferedWriter.write(line + "\n");
+			}
+			
+			bufferedWriter.close();
+			fileWriter.close();
 		} 
 		catch (IOException e) 
 		{

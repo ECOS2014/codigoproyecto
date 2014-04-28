@@ -126,7 +126,10 @@ public class FileManager
 			
 			while(line!=null)
 			{
-				Line tempLine = comparsionLines.get(comparsionLineIndex); 
+				Line tempLine = null;
+				if (comparsionLineIndex < comparsionLines.size())
+					tempLine = comparsionLines.get(comparsionLineIndex);
+							
 				while (tempLine != null && tempLine.getLocation() == location)
 				{
 					bufferedWriter.write(FileManager.getStringWithTabs(FileManager.getTabsAtLine(line)) + tempLine.toLineLabel() + "\n");

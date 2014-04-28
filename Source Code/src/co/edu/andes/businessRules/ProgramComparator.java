@@ -67,9 +67,11 @@ public class ProgramComparator
 		for (int i=0; i<m; i++)
 		{
 			String currentVersionName = currentVersion.getPartNameAt(i);
-			System.out.println(currentVersionName);
+			System.out.println("-- -- --> current version name: " + currentVersionName + " <-- -- --");
 			String currentVersionFilePtah = currentVersion.getFilePathOf(currentVersionName);
+			System.out.println("-> current file path: " + currentVersionFilePtah);
 			String lastVersionFilePtah = lastVersion.getFilePathOf(currentVersionName);
+			System.out.println("-> last file path: " + lastVersionFilePtah);
 			
 			List<Line> partWithChanges = new ArrayList<Line>();
 			ProgramPart part = new ProgramPart();
@@ -83,6 +85,8 @@ public class ProgramComparator
 			
 			saveFile(currentVersionFilePtah, outputProgramDirectory + currentVersionName, part, partWithChanges);
 			outChangeLabel.addPart(part);
+			
+			System.out.println("-> compare " + currentVersionName + " end\n\n\n" );
 		}
 	}
 	

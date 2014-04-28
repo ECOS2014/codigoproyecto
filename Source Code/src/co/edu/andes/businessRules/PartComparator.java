@@ -18,6 +18,11 @@ public class PartComparator
 	public void compareParts(List<Line> oldPart, List<Line> newPart, ProgramPart partSummary, List<Line> comparsionResultLines)
 	{
 		System.out.println("---------------- compareParts(Begin) ----------------");
+		Line.printArray("Old Part", oldPart);
+		System.out.println("vs.");
+		Line.printArray("New Part", newPart);
+		
+		
 		int linesAdded;
 		int linesDeleted;
 		int totalLOC; 

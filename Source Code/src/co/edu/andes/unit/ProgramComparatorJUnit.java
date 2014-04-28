@@ -8,12 +8,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import co.edu.andes.businessRules.FactoryLOCCounter;
+//import co.edu.andes.businessRules.FactoryLOCCounter;
 import co.edu.andes.businessRules.ProgramComparator;
 import co.edu.andes.businessRules.PartComparator;
 import co.edu.andes.entities.Line;
 import co.edu.andes.entities.ProgramPart;
-import co.edu.andes.tools.FileManager;
+//import co.edu.andes.tools.FileManager;
 
 public class ProgramComparatorJUnit {
 	
@@ -54,9 +54,9 @@ public class ProgramComparatorJUnit {
 		currentVersion.add(lineCurrentVersion3);
 		currentVersion.add(lineCurrentVersion4);
 		
-		List<String> newFile;
+		//List<String> newFile;
 		ProgramPart part;
-		newFile = new ArrayList<String>();
+		//newFile = new ArrayList<String>();
 		part = new  ProgramPart();
 		part.setPartName("functionTest");
 		//partComparator.compareParts(oldVersion, currentVersion, part, newFile);
@@ -90,9 +90,9 @@ public class ProgramComparatorJUnit {
 		currentVersion.add(lineCurrentVersion3);
 		currentVersion.add(lineCurrentVersion4);
 		
-		List<String> newFile;
+		//List<String> newFile;
 		ProgramPart part;
-		newFile = new ArrayList<String>();
+		//newFile = new ArrayList<String>();
 		part = new  ProgramPart();
 		part.setPartName("functionTest2");
 		//partComparator.compareParts(oldVersion, currentVersion, part, newFile);
@@ -126,9 +126,9 @@ public class ProgramComparatorJUnit {
 		currentVersion.add(lineCurrentVersion3);
 		currentVersion.add(lineCurrentVersion4);
 		
-		List<String> newFile;
+		//List<String> newFile;
 		ProgramPart part;
-		newFile = new ArrayList<String>();
+		//newFile = new ArrayList<String>();
 		part = new  ProgramPart();
 		part.setPartName("functionTest3");
 		//partComparator.compareParts(oldVersion, currentVersion, part, newFile);

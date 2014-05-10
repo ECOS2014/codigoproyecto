@@ -12,6 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Clase para ingresar la información del auto, chagne number y descripción
+ * @author Enterprise Gear Set
+ *
+ */
 public class PanelChangeData extends JPanel 
 {
 	private static final long serialVersionUID = 1L;

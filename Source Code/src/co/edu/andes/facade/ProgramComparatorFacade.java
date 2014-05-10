@@ -6,6 +6,11 @@ import co.edu.andes.businessRules.ProgramComparator;
 import co.edu.andes.entities.ChangeLabel;
 import co.edu.andes.entities.ProgramPart;
 
+/**
+ * Facade del comparador del programa
+ * @author Enterprise Gear Set
+ *
+ */
 public class ProgramComparatorFacade 
 {
 	public static void comparePrograms(String pathCurrentProgram, String currentVersionHeader, String pathOldProgram, String pathNewProgram,  ChangeLabel changeLabel, List<ProgramPart>parts, String language)

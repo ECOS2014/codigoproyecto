@@ -12,6 +12,11 @@ import org.junit.Test;
 //import co.edu.andes.entities.Line;
 import co.edu.andes.tools.FileManager;
 
+/**
+ * Set unitario de pruebas para ficheros y directorios
+ * @author Enterprise gear Set
+ *
+ */
 public class FileManagerJUnit {
 
 	FileManager fileManager;

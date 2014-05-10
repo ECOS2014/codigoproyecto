@@ -14,6 +14,11 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Panel de impresión de salida de información.
+ * @author Enterprise Gear Set
+ *
+ */
 public class PanelOutput extends JPanel implements ActionListener
 {
 	private static final long serialVersionUID = 1L;

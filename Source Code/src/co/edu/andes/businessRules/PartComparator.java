@@ -6,6 +6,11 @@ import co.edu.andes.entities.Line;
 import co.edu.andes.entities.LineType;
 import co.edu.andes.entities.ProgramPart;
 
+/**
+ * Esta clase hace las operaciones especificas de comparar partes (class en caso de Java)
+ * @author Enterprise Gear Set
+ *
+ */
 public class PartComparator 
 {
 	/**
@@ -157,15 +162,6 @@ public class PartComparator
 		return notFoundCount;
 	}
 	
-	/**
-	 * 
-	 * @param line
-	 * @param lineSet
-	 * @param markWhenNotFound
-	 * @param markWhenFound
-	 * @param includeCriterion
-	 * @return
-	 */
 	/**
 	 * @param line
 	 * @param lineSet

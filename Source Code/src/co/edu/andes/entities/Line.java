@@ -3,6 +3,11 @@ package co.edu.andes.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entidad: Line
+ * @author Enterprise Gear Set
+ *
+ */
 public class Line 
 {
 	private String content;

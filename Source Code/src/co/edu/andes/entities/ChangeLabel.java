@@ -3,6 +3,11 @@ package co.edu.andes.entities;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Entidad: change Label
+ * @author Enterprise Gear Set
+ *
+ */
 public class ChangeLabel 
 {
 	private int changeNumber;

@@ -15,6 +15,11 @@ import java.util.List;
 import co.edu.andes.entities.Line;
 import co.edu.andes.entities.ProgramPart;
 
+/**
+ * Clase encargada de desarrollar las operaciones de I/O de ficheors y directorios
+ * @author Enterprise Gear Set
+ *
+ */
 public class FileManager 
 {
 	/**

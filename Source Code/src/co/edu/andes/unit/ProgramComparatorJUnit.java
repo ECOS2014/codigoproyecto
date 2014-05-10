@@ -15,6 +15,11 @@ import co.edu.andes.entities.Line;
 import co.edu.andes.entities.ProgramPart;
 //import co.edu.andes.tools.FileManager;
 
+/**
+ * Test unitario de pruebas para el comparador de programa
+ * @author xDEAMx
+ *
+ */
 public class ProgramComparatorJUnit {
 	
 	//class

@@ -13,6 +13,11 @@ import co.edu.andes.entities.LanguageType;
 import co.edu.andes.entities.ProgramPart;
 import co.edu.andes.facade.ProgramComparatorFacade;
 
+/**
+ * Panel principal de GUI para el programa
+ * @author Enterprise Gear Set
+ *
+ */
 public class ProgramComparatorGUI extends JFrame 
 {
 	private static final long serialVersionUID = 1L;

@@ -12,6 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Panel de selección de directorio
+ * @author Enterprise Gear Set
+ *
+ */
 public class PanelInputDirectoryPath extends JPanel implements ActionListener
 {
 	private static final long serialVersionUID = 1L;

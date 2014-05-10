@@ -11,6 +11,11 @@ import org.junit.Test;
 import co.edu.andes.businessRules.JavaLOCCounter;
 import co.edu.andes.entities.Line;
 
+/**
+ * Test unitario de pruebas para el contador de lineas de lenguaje Java
+ * @author Enterprise Gear Set
+ *
+ */
 public class JavaLOCCounterJUnit {
 
 	JavaLOCCounter javaLOCCounter;

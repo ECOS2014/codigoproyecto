@@ -6,11 +6,18 @@ import java.util.List;
 import co.edu.andes.entities.LanguageType;
 import co.edu.andes.entities.Line;
 
+/**
+ * Esta clase realiza las operaciones acerca de LOC Counter
+ * @author Enterprise Gear Set
+ *
+ */
 public class JavaLOCCounter extends LOCCounter 
 {	
 	private boolean hasStartComment;
 	/**
 	 * Obtener lineas logicas de la clase
+	 * @param List<String>
+	 * @return List<Line>
 	 */
 	public List<Line> getLogicLines(List<String> lines)
 	{

@@ -11,6 +11,11 @@ import co.edu.andes.entities.Program;
 import co.edu.andes.entities.ProgramPart;
 import co.edu.andes.tools.FileManager;
 
+/**
+ * Esta clase toma todo el programa (souce code) para comparar y hacer LOC
+ * @author Enterprise Gear Set
+ *
+ */
 public class ProgramComparator 
 {
 	private PartComparator partComparator;

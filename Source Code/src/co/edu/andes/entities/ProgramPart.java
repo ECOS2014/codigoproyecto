@@ -4,6 +4,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Entidad: ProgramPart
+ * 
+ * @author Enterprise Gear Set
+ *
+ */
 public class ProgramPart 
 {
 	private String partName;

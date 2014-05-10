@@ -7,6 +7,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Panel de inserción acerca de la versión del aplicativo.
+ * @author Enterprise Gear Set
+ *
+ */
 public class PanelInputVersion extends JPanel 
 {
 	private static final long serialVersionUID = 1L;

@@ -3,6 +3,11 @@ package co.edu.andes.entities;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+/**
+ * Entidad:Program
+ * @author Enterprise Gear Set
+ *
+ */
 public class Program 
 {
 	private ArrayList<String> partNames;
